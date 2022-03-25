@@ -14,7 +14,7 @@
             <div class="container border border-dark">
                 <h1>Registreer</h1>
                 <h5>Meld je aan bij Anoroc Services, wij beschermen jouw software tegen malware!</h5>
-                <form action="">
+                <form id="form" action="">
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
@@ -142,21 +142,21 @@
                             </div>
                         </div>
                         <hr>
-                        <button type="submit" class="btn btn-primary mb-3">Wave your magic wand</button>
+                        <button id="btnSubmit" type="submit" class="btn btn-primary mb-3">Wave your magic wand</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="col-3">
-            <div class="alert alert-danger" role="alert">
+            <div id="error" class="alert alert-danger" role="alert">
                 <h4>Yikes, errors...</h4>
                 <p></p>
             </div>
-            <div class="alert alert-success" role="alert">
+            <div id="success" class="alert alert-success" role="alert">
                 <h4>Goed gedaan!</h4>
                 <p>Aww yeah, je werd geregistreerd.</p>
             </div>
-            <div class="alert alert-info" role="alert">
+            <div id="info" class="alert alert-info" role="alert">
                 <h4>Betalingswijze</h4>
                 <p></p>
             </div>

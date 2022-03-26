@@ -52,10 +52,11 @@ form.addEventListener('submit', (e) => {
     //let herhaalWachtwoord = document.getElementById("herhaalWachtwoord").value;
     //validatePassword(wachtwoord, herhaalWachtwoord);
 
+    ////Check betalingswijze
+    //validatePayment(document.querySelector('input[name="flexRadioDefault"]:checked').value);
 
-    validatePayment(document.querySelector('input[name="flexRadioDefault"]:checked').value);
-
-
+    //Check postcode
+    checkPC('#postcode');
 
     //Errors tonen
     if (errors.length > 0){
@@ -116,4 +117,14 @@ function validatePassword(password, repeatPassword){
 //https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button
 function validatePayment(veld){
     alert(veld);
+}
+
+
+function checkPC(veld){
+    let postcode = document.querySelector(veld).value;
+    if (postcode >= 1000 && postcode <= 9999){
+        alert("goed");
+    } else {
+        alert("De waarde van postcode moet tussen 1000 en 9999 liggen.");
+    }
 }

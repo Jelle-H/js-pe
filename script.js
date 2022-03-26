@@ -33,26 +33,29 @@ const form = document.getElementById('form');
 let errors = [];
 
 form.addEventListener('submit', (e) => {
-    // Validaties
+    //// Validaties
     //checkEmptyField('#voornaam', 'Het veld voornaam is vereist.');
     //checkEmptyField('#naam', 'Het veld naam is vereist.');
     //checkEmptyField('#gebruikersnaam', 'Het veld gebruikersnaam is vereist.');
     //checkEmptyField('#adres', 'Het veld adres is vereist.');
 
-    //Check e-mailadres
+    ////Check e-mailadres
     //validateEmail('#email');
 
 
-    //Controleren of velden wachtwoord zijn invuld
-    checkEmptyField('#wachtwoord', 'Het veld wachtwoord is vereist.');
-    checkEmptyField('#herhaalWachtwoord', 'Het veld herhaal wachtwoord is vereist.');
+    ////Controleren of velden wachtwoord zijn invuld
+    //checkEmptyField('#wachtwoord', 'Het veld wachtwoord is vereist.');
+    //checkEmptyField('#herhaalWachtwoord', 'Het veld herhaal wachtwoord is vereist.');
 
-    //Check wachtwoorden
-    let wachtwoord = document.getElementById("wachtwoord").value;
-    let herhaalWachtwoord = document.getElementById("herhaalWachtwoord").value;
-    validatePassword(wachtwoord, herhaalWachtwoord);
+    ////Check wachtwoorden
+    //let wachtwoord = document.getElementById("wachtwoord").value;
+    //let herhaalWachtwoord = document.getElementById("herhaalWachtwoord").value;
+    //validatePassword(wachtwoord, herhaalWachtwoord);
 
-    
+
+    validatePayment(document.querySelector('input[name="flexRadioDefault"]:checked').value);
+
+
 
     //Errors tonen
     if (errors.length > 0){
@@ -102,7 +105,15 @@ function validatePassword(password, repeatPassword){
     if (password.length < 7) {
         alert("Te kort!!!!!!!!!!");
     } 
+    
+    //Controleren of wachtwoord hetzelde is
     if (wachtwoord != repeatPassword){
         alert("Velden zijn niet gelijk!");
     }  
+}
+
+
+//https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button
+function validatePayment(veld){
+    alert(veld);
 }

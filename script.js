@@ -34,13 +34,13 @@ validateForm.addEventListener('submit', (e) => {
     // validatePassword("wachtwoord", "herhaalWachtwoord");
 
     //Check betalingswijze
-    let betalingswijze = validatePayment(document.querySelector('input[name="flexRadioDefault"]:checked').value);
+    let betalingswijze = validatePayment('input[name="flexRadioDefault"]:checked');
 
     //Check postcode
     // checkPC('#postcode');
 
     // Controleren of algemene voorwaarden zijn aangeduid.
-    algemeneVoorwaarden('#algemeneVoorwaarden', 'Je moet de algemene voorwaarden accepteren.');
+    //algemeneVoorwaarden('#algemeneVoorwaarden', 'Je moet de algemene voorwaarden accepteren.');
 
     // Meldingen tonen
     if (errors.length > 0){
@@ -53,7 +53,7 @@ validateForm.addEventListener('submit', (e) => {
     {
         document.getElementById("success").style.visibility = 'visible';
         document.getElementById("info").style.visibility = 'visible';
-        document.getElementsByTagName("p")[2].innerHTML= `Je betalngswijze is ${betalingswijze}`;  
+        document.getElementsByTagName("p")[2].innerText = `Je betalingswijze is ${betalingswijze}`;  
     }
     e.preventDefault();
 })
@@ -106,9 +106,8 @@ function validatePassword(password, repeatPassword){
 
 // Functie controle betalingswijze
 function validatePayment(veld){
-    //https://stackoverflow.com/questions/15839169/how-to-get-value-of-selected-radio-button
-    
-    alert(veld);
+    let input = document.querySelector(veld).value;
+    return input;
 }
 
 

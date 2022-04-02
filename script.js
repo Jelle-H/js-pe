@@ -4,6 +4,7 @@ hideAlerts();
 //https://www.youtube.com/watch?v=In0nB0ABaUk
 const validateForm = document.getElementById('form');
 
+// Array aanmaken
 let errors = [];
 
 validateForm.addEventListener('submit', (e) => {
@@ -17,21 +18,18 @@ validateForm.addEventListener('submit', (e) => {
     checkEmptyField('#naam', 'Het veld naam is vereist.');
     checkEmptyField('#gebruikersnaam', 'Het veld gebruikersnaam is vereist.');
     checkEmptyField('#email', 'Het veld email is vereist.');
-    checkEmptyField('#wachtwoord', 'Het veld wachtwoord is vereist.');
-    checkEmptyField('#herhaalWachtwoord', 'Het veld herhaal wachtwoord is vereist.');
     checkEmptyField('#adres', 'Het veld adres is vereist.');
     checkEmptyField('#land', 'Het veld land is vereist.');
     checkEmptyField('#provincie', 'Het veld provincie is vereist.');
-    checkEmptyField('#postcode', 'Het veld postcode is vereist.');
 
     //Check e-mailadres
     validateEmail('#email');
     
     //Check wachtwoorden
-    validatePassword("wachtwoord", "herhaalWachtwoord");
+    validatePassword('wachtwoord', 'Het veld wachtwoord is vereist.', 'herhaalWachtwoord', 'Het veld herhaal wachtwoord is vereist.');
 
     //Check postcode
-    checkPC('#postcode');
+    checkPC('#postcode', 'Het veld postcode is vereist.');
 
     //Check betalingswijze
     let betalingswijze = validatePayment('input[name="flexRadioDefault"]:checked');
@@ -86,21 +84,35 @@ function validateEmail(email){
 }
 
 // Functie controle wachtwoord
-function validatePassword(password, repeatPassword){
+function validatePassword(password, passwordMelding, repeatPassword, repeatPasswordMelding){
     //https://www.javatpoint.com/confirm-password-validation-in-javascript
 
     let wachtwoord = document.getElementById(password).value;
     let herhaalWachtwoord = document.getElementById(repeatPassword).value;
-
-    //Wachtwoord controleren op lengte
-    if (wachtwoord.length < 7) {
-        errors += "Je wachtwoord is te kort." + "\n";
-    } 
     
-    //Controleren of wachtwoord hetzelde is
-    if (wachtwoord != herhaalWachtwoord){
-        errors += "Je wachtwoorden komen niet overeen." + "\n";
-    }  
+    let bool1 = true;
+    let bool2 = true;
+
+    if (wachtwoord == "") {
+        errors += passwordMelding + "\n";
+        bool1 = false;
+    } 
+
+    if (herhaalWachtwoord == "") {
+        errors += repeatPasswordMelding + "\n";
+        bool2 = false;
+    } 
+
+    if (bool1 == true && bool2 == true){
+        //Wachtwoord controleren op lengte
+        if (wachtwoord.length < 7) {
+            errors += "Je wachtwoord is te kort." + "\n";
+        } 
+        //Controleren of wachtwoord hetzelfde is
+        else if (wachtwoord != herhaalWachtwoord){
+            errors += "Je wachtwoorden komen niet overeen." + "\n";
+        }  
+    }
 }
 
 // Functie controle betalingswijze
@@ -110,9 +122,11 @@ function validatePayment(veld){
 }
 
 // Functie controle postcode
-function checkPC(veld){
+function checkPC(veld, melding){
     let postcode = document.querySelector(veld).value;
-    if (!(postcode >= 1000 && postcode <= 9999)){
+    if (postcode == "") {
+        errors += melding + "\n";
+    } else if (!(postcode >= 1000 && postcode <= 9999)){
         errors += "De waarde van postcode moet tussen 1000 en 9999 liggen." + "\n"; 
     }
 }

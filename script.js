@@ -17,7 +17,6 @@ validateForm.addEventListener('submit', (e) => {
     checkEmptyField('#voornaam', 'Het veld voornaam is vereist.');
     checkEmptyField('#naam', 'Het veld naam is vereist.');
     checkEmptyField('#gebruikersnaam', 'Het veld gebruikersnaam is vereist.');
-    checkEmptyField('#email', 'Het veld email is vereist.');
     checkEmptyField('#adres', 'Het veld adres is vereist.');
     checkEmptyField('#land', 'Het veld land is vereist.');
     checkEmptyField('#provincie', 'Het veld provincie is vereist.');
@@ -29,7 +28,7 @@ validateForm.addEventListener('submit', (e) => {
     validatePassword('wachtwoord', 'Het veld wachtwoord is vereist.', 'herhaalWachtwoord', 'Het veld herhaal wachtwoord is vereist.');
 
     //Check postcode
-    checkPC('#postcode', 'Het veld postcode is vereist.');
+    checkPC('#postcode');
 
     //Check betalingswijze
     let betalingswijze = validatePayment('input[name="flexRadioDefault"]:checked');
@@ -75,11 +74,15 @@ function validateEmail(email){
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     let mail = document.querySelector(email).value;
 
-    if (mail.match(validRegex)) {
-      return true;
+    if (mail == "") {
+        errors += "Het veld email is vereist." + "\n";
     } else {
-      errors += "E-mailadres is niet correct." + "\n"; 
-      return false;
+        if (mail.match(validRegex)) {
+            return true;
+        } else {
+            errors += "E-mailadres is niet correct." + "\n"; 
+            return false;
+        }
     }
 }
 
@@ -122,10 +125,10 @@ function validatePayment(veld){
 }
 
 // Functie controle postcode
-function checkPC(veld, melding){
+function checkPC(veld){
     let postcode = document.querySelector(veld).value;
     if (postcode == "") {
-        errors += melding + "\n";
+        errors += "Het veld postcode is vereist." + "\n";
     } else if (!(postcode >= 1000 && postcode <= 9999)){
         errors += "De waarde van postcode moet tussen 1000 en 9999 liggen." + "\n"; 
     }
